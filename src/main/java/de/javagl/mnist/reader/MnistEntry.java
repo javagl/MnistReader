@@ -18,27 +18,27 @@ public class MnistEntry
      * The index of the entry
      */
     private final int index;
-    
+
     /**
      * The class label of the entry
      */
     private final byte label;
-    
+
     /**
      * The number of rows of the image data
      */
     private final int numRows;
-    
+
     /**
      * The number of columns of the image data
      */
     private final int numCols;
-    
+
     /**
      * The image data 
      */
     private final byte[] imageData;        
-    
+
     /**
      * Default constructor
      * 
@@ -129,15 +129,15 @@ public class MnistEntry
         System.arraycopy(getImageData(), 0, data, 0, data.length);
         return image;
     }
-    
-    
+
+
     @Override
     public String toString()
     {
         String indexString = String.format("%05d", index);
         return "MnistEntry[" 
-            + "index=" + indexString + "," 
-            + "label=" + label + "]";
+        + "index=" + indexString + "," 
+        + "label=" + label + "]";
     }
 
 }

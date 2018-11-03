@@ -40,13 +40,13 @@ public class ReadFromWebsite
 
         URL imagesUrl = new URL(baseUrl + "t10k-images-idx3-ubyte.gz");
         URL labelsUrl = new URL(baseUrl + "t10k-labels-idx1-ubyte.gz");
-        
+
         try (InputStream imagesInputStream = imagesUrl.openStream();
-             InputStream labelsInputStream = labelsUrl.openStream())
+            InputStream labelsInputStream = labelsUrl.openStream())
         {
             MnistCompressedReader mnistReader = new MnistCompressedReader();
             Consumer<MnistEntry> consumer = System.out::println;
-            
+
             mnistReader.readCompressed(
                 imagesInputStream, labelsInputStream, consumer);
         }

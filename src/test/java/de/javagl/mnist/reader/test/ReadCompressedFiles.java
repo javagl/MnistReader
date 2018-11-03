@@ -40,10 +40,10 @@ public class ReadCompressedFiles
     private static void readCompressedFiles() throws IOException
     {
         Path inputDirectoryPath = Paths.get("./data");
-        
+
         MnistCompressedReader mnistReader = new MnistCompressedReader();
         Consumer<MnistEntry> consumer = System.out::println;
-        
+
         System.out.println("Training data:");
         mnistReader.readCompressedTraining(inputDirectoryPath, consumer);
 

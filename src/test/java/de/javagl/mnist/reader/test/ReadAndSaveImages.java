@@ -35,7 +35,7 @@ public class ReadAndSaveImages
     {
         readAndSaveImages();
     }
-    
+
     /**
      * Read the MNIST data from a local directory, and store the
      * MNIST images in the given output directory, separated
@@ -51,23 +51,23 @@ public class ReadAndSaveImages
     {
         Path inputDirectoryPath = Paths.get("./data/mnist");
         Path outputDirectoryPath = Paths.get("./data/mnistImages");
-        
+
         MnistCompressedReader mnistReader = new MnistCompressedReader();
-        
+
         System.out.println("Creating training images...");
         Path trainOutputPath = outputDirectoryPath.resolve("train");
         trainOutputPath.toFile().mkdirs();
         Consumer<MnistEntry> trainConsumer = 
             mnistEntry -> saveAsImageUnchecked(mnistEntry, trainOutputPath);
-        mnistReader.readCompressedTraining(inputDirectoryPath, trainConsumer);
-        
-        System.out.println("Creating testing images...");
-        Path testOutputPath = outputDirectoryPath.resolve("test");
-        testOutputPath.toFile().mkdirs();
-        Consumer<MnistEntry> testConsumer = 
-            mnistEntry -> saveAsImageUnchecked(mnistEntry, testOutputPath);
-        mnistReader.readCompressedTesting(inputDirectoryPath, testConsumer);
-        
+            mnistReader.readCompressedTraining(inputDirectoryPath, trainConsumer);
+
+            System.out.println("Creating testing images...");
+            Path testOutputPath = outputDirectoryPath.resolve("test");
+            testOutputPath.toFile().mkdirs();
+            Consumer<MnistEntry> testConsumer = 
+                mnistEntry -> saveAsImageUnchecked(mnistEntry, testOutputPath);
+                mnistReader.readCompressedTesting(inputDirectoryPath, testConsumer);
+
     }
 
     /**
@@ -94,7 +94,7 @@ public class ReadAndSaveImages
         BufferedImage image = mnistEntry.createImage();
         ImageIO.write(image, "png", outputFile);
     }
-    
+
     /**
      * Passes the call to {@link #saveAsImage(MnistEntry, Path)}, printing
      * an error message if an exception is thrown.
@@ -114,7 +114,7 @@ public class ReadAndSaveImages
             System.err.println(e.getMessage());
         }
     }
-    
-    
+
+
 
 }

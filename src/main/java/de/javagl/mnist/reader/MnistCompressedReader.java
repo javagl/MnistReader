@@ -26,7 +26,7 @@ public class MnistCompressedReader
      * The {@link MnistDecompressedReader} that will read the decompressed data
      */
     private final MnistDecompressedReader mnistDecompressedReader;
-    
+
     /**
      * Default constructor
      */
@@ -34,7 +34,7 @@ public class MnistCompressedReader
     {
         this.mnistDecompressedReader = new MnistDecompressedReader();
     }
-    
+
     /**
      * Read the MNIST training data from the given directory. The data is 
      * assumed to be located in files with their default names,
@@ -55,7 +55,7 @@ public class MnistCompressedReader
         Path labelsFilePath = inputDirectoryPath.resolve(trainLabelsFileName);
         readCompressed(imagesFilePath, labelsFilePath, consumer);
     }
-    
+
     /**
      * Read the MNIST training data from the given directory. The data is 
      * assumed to be located in files with their default names,
@@ -76,8 +76,8 @@ public class MnistCompressedReader
         Path labelsFilePath = inputDirectoryPath.resolve(testLabelsFileName);
         readCompressed(imagesFilePath, labelsFilePath, consumer);
     }
-    
-    
+
+
     /**
      * Read the MNIST data from the specified (compressed) files.
      * 
@@ -91,7 +91,7 @@ public class MnistCompressedReader
         Consumer<? super MnistEntry> consumer) throws IOException
     {
         try (InputStream compressedImagesInputStream = 
-                new FileInputStream(imagesFilePath.toFile());
+            new FileInputStream(imagesFilePath.toFile());
             InputStream compressedLabelsInputStream = 
                 new FileInputStream(labelsFilePath.toFile()))
         {
@@ -101,7 +101,7 @@ public class MnistCompressedReader
                 consumer);
         }
     }
-    
+
     /**
      * Read the MNIST data from the given (compressed) input streams.
      * The caller is responsible for closing the given streams.
@@ -153,5 +153,5 @@ public class MnistCompressedReader
             throw new IOException(e);
         }
     }
-    
+
 }

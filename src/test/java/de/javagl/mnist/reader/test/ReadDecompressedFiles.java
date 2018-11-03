@@ -41,10 +41,10 @@ public class ReadDecompressedFiles
     private static void readDecompressedFiles() throws IOException
     {
         Path inputDirectoryPath = Paths.get("./data");
-        
+
         MnistDecompressedReader mnistReader = new MnistDecompressedReader();
         Consumer<MnistEntry> consumer = System.out::println;
-        
+
         System.out.println("Training data:");
         mnistReader.readDecompressedTraining(inputDirectoryPath, consumer);
 

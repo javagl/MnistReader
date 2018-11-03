@@ -26,7 +26,7 @@ public class MnistDecompressedReader
     {
         // Default constructor
     }
-    
+
     /**
      * Read the MNIST training data from the given directory. The data is 
      * assumed to be located in files with their default names,
@@ -49,7 +49,7 @@ public class MnistDecompressedReader
         Path labelsFilePath = inputDirectoryPath.resolve(trainLabelsFileName);
         readDecompressed(imagesFilePath, labelsFilePath, consumer);
     }
-    
+
     /**
      * Read the MNIST training data from the given directory. The data is 
      * assumed to be located in files with their default names,
@@ -72,8 +72,8 @@ public class MnistDecompressedReader
         Path labelsFilePath = inputDirectoryPath.resolve(testLabelsFileName);
         readDecompressed(imagesFilePath, labelsFilePath, consumer);
     }
-    
-    
+
+
     /**
      * Read the MNIST data from the specified (decompressed) files.
      * 
@@ -87,7 +87,7 @@ public class MnistDecompressedReader
         Consumer<? super MnistEntry> consumer) throws IOException
     {
         try (InputStream decompressedImagesInputStream = 
-                new FileInputStream(imagesFilePath.toFile());
+            new FileInputStream(imagesFilePath.toFile());
             InputStream decompressedLabelsInputStream = 
                 new FileInputStream(labelsFilePath.toFile()))
         {
@@ -97,7 +97,7 @@ public class MnistDecompressedReader
                 consumer);
         }
     }
-    
+
     /**
      * Read the MNIST data from the given (decompressed) input streams.
      * The caller is responsible for closing the given streams.
@@ -116,26 +116,26 @@ public class MnistDecompressedReader
         Consumer<? super MnistEntry> consumer) throws IOException
     {
         Objects.requireNonNull(consumer, "The consumer may not be null");
-        
+
         DataInputStream imagesDataInputStream = 
             new DataInputStream(decompressedImagesInputStream);
         DataInputStream labelsDataInputStream = 
             new DataInputStream(decompressedLabelsInputStream);
-        
+
         int magicImages = imagesDataInputStream.readInt();
         if (magicImages != 0x803)
         {
             throw new IOException("Expected magic header of 0x803 "
                 + "for images, but found " + magicImages);
         }
-        
+
         int magicLabels = labelsDataInputStream.readInt();
         if (magicLabels != 0x801)
         {
             throw new IOException("Expected magic header of 0x801 "
                 + "for labels, but found " + magicLabels);
         }
-        
+
         int numberOfImages = imagesDataInputStream.readInt();
         int numberOfLabels = labelsDataInputStream.readInt();
 
@@ -153,13 +153,13 @@ public class MnistDecompressedReader
             byte label = labelsDataInputStream.readByte();
             byte imageData[] = new byte[numRows * numCols];
             read(imagesDataInputStream, imageData);
-            
+
             MnistEntry mnistEntry = new MnistEntry(
                 n, label, numRows, numCols, imageData);
             consumer.accept(mnistEntry);
         }
     }
-    
+
     /**
      * Read bytes from the given input stream, filling the given array
      * 
@@ -190,5 +190,5 @@ public class MnistDecompressedReader
             + " bytes, but only found " + offset);
     }
 
-    
+
 }
