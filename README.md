@@ -57,7 +57,7 @@ can be used:
 
 The decompression is then done on the fly, using 
 [Apache Commons Compress](https://commons.apache.org/proper/commons-compress/).
-For non-maven builds, the [commons-compress-1.10.jar](http://central.maven.org/maven2/org/apache/commons/commons-compress/1.10/commons-compress-1.10.jar)
+For non-maven builds, the [commons-compress-1.18.jar](http://central.maven.org/maven2/org/apache/commons/commons-compress/1.18/commons-compress-1.18.jar)
 can be downloaded and added to the classpath.
 
 
