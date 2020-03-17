@@ -3,16 +3,12 @@
  */ 
 package de.javagl.mnist.reader;
 
-import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.function.Consumer;
-
-import org.apache.commons.compress.compressors.CompressorException;
-import org.apache.commons.compress.compressors.CompressorInputStream;
-import org.apache.commons.compress.compressors.CompressorStreamFactory;
+import java.util.zip.GZIPInputStream;
 
 /**
  * A class for reading the MNIST data set from the original (compressed)
@@ -120,38 +116,9 @@ public class MnistCompressedReader
         Consumer<? super MnistEntry> consumer) throws IOException
     {
         mnistDecompressedReader.readDecompressed(
-            decompress(compressedImagesInputStream), 
-            decompress(compressedLabelsInputStream),
+            new GZIPInputStream(compressedImagesInputStream), 
+            new GZIPInputStream(compressedLabelsInputStream),
             consumer);
-    }
-
-    /**
-     * Create a decompressed input stream from the given compressed 
-     * input stream.
-     * 
-     * @param compressedInputStream The compressed input stream
-     * @return The decompressed input stream
-     * @throws IOException If the compression type of the given input stream
-     * cannot be determined, or any other IO error occurs 
-     */
-    private static InputStream decompress(InputStream compressedInputStream) 
-        throws IOException
-    {
-        BufferedInputStream bufferedInputStream = 
-            new BufferedInputStream(compressedInputStream);
-        CompressorStreamFactory compressorStreamFactory = 
-            new CompressorStreamFactory();
-        try
-        {
-            CompressorInputStream decompressedInputStream = 
-                compressorStreamFactory.createCompressorInputStream(
-                    bufferedInputStream);
-            return decompressedInputStream;
-        }
-        catch (CompressorException e)
-        {
-            throw new IOException(e);
-        }
     }
 
 }
